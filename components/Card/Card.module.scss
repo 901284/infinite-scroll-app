@@ -1,0 +1,37 @@
+.main {
+  overflow: hidden;
+  
+  figure {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    position: relative;
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    padding: 8px 0;
+
+    h3 {
+      text-transform: capitalize;
+    }
+  }
+
+  .info {
+    display: flex;
+    gap: 1rem;
+    padding: 6px 0;
+
+    h4 {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 1.25rem;
+    }
+  }
+}
