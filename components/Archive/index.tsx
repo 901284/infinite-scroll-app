@@ -1,16 +1,16 @@
 'use client';
-import { fetchPosts } from '@/app/action';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './Archive.module.scss';
 import Card from '../Card';
 import { useInView } from 'react-intersection-observer';
 import { AnimatePresence, motion } from 'framer-motion';
+import { fetchPosts } from '@/app/tools';
 
-let page = 2;
+let page = 1;
 
 const Archive = () => {
   const [data, setData] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const { ref, inView } = useInView();
 
@@ -19,7 +19,6 @@ const Archive = () => {
   useEffect(() => {
     if (inView) {
       setLoading(true);
-
       fetchRef.current++;
       const fetchId = fetchRef.current;
 
@@ -31,18 +30,19 @@ const Archive = () => {
         setLoading(false);
       }
     }
-  }, [inView, data]);
+    setLoading(true)
+  }, [inView]);
 
   const cardVariants = {
     initial: (index) => ({
-      // opacity: 0,
+      opacity: 0,
       x: -10,
       transition: {
         delay: 0.15 * index,
       },
     }),
     animate: (index) => ({
-      // opacity: 1,
+      opacity: 1,
       x: 0,
       transition: {
         delay: 0.15 * index,
@@ -53,9 +53,8 @@ const Archive = () => {
   return (
     <AnimatePresence>
       <section className={`${styles.main} container`}>
-        <div className={styles.results} ref={ref}>
+        <div className={styles.results}>
           {!!data?.length &&
-            !loading &&
             data?.map((item, i) => (
               <motion.div
                 variants={cardVariants}
@@ -75,7 +74,7 @@ const Archive = () => {
               </motion.div>
             ))}
         </div>
-        <div className="loader" ref={ref} />
+        {loading && <div className="loader" ref={ref} />}
       </section>
     </AnimatePresence>
   );
