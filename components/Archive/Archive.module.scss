@@ -1,6 +1,18 @@
 .main {
-  .results {
-    display: grid;
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 1rem;
+}
+
+@media only screen and (min-width: 400px) {
+  .main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .main {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }

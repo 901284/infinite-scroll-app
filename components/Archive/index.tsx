@@ -52,8 +52,8 @@ const Archive = () => {
 
   return (
     <AnimatePresence>
-      <section className={`${styles.main} container`}>
-        <div className={styles.results}>
+      <section className='container'>
+        <div className={styles.main}>
           {!!data?.length &&
             data?.map((item, i) => (
               <motion.div
